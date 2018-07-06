@@ -59,4 +59,10 @@ module.exports = {
       new webpack.HotModuleReplacementPlugin(),
     ]
     : [HTMLWebpackPluginConfig, DefinePluginConfig],
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    lib: 'empty',
+  },
 };
