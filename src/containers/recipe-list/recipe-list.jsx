@@ -18,7 +18,7 @@ const RecipeList = ({
 
   return (
     <div>
-      <List data={JSON.parse(data)} />
+      <List data={data} />
     </div>
   );
 };
@@ -32,7 +32,7 @@ RecipeList.defaultProps = {
 RecipeList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
-    body: PropTypes.string,
+    content: PropTypes.string,
   })),
   isLoading: PropTypes.bool,
   loadingError: PropTypes.bool,

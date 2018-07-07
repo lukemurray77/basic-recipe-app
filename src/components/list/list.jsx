@@ -29,7 +29,7 @@ List.defaultProps = {
 List.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
-    body: PropTypes.string,
+    content: PropTypes.string,
   })),
 };
 

@@ -8,7 +8,7 @@ const RecipeCard = (props) => {
   return (
     <div className="recipe-card">
       <h4 className="recipe-title">{recipe.title}</h4>
-      <div className="recipe-body">{recipe.body}</div>
+      <div className="recipe-body">{recipe.content}</div>
     </div>
   );
 };
@@ -16,7 +16,7 @@ const RecipeCard = (props) => {
 RecipeCard.propTypes = {
   recipe: PropTypes.shape({
     title: PropTypes.string,
-    body: PropTypes.string,
+    content: PropTypes.string,
   }).isRequired,
 };
 

@@ -19,7 +19,7 @@ const getData = id => (dispatch) => {
   dispatch({ type: GET_RECIPE_DATA });
   return rp(options)
     .then((data) => {
-      dispatch({ type: SET_RECIPE_DATA, data });
+      dispatch({ type: SET_RECIPE_DATA, data: JSON.parse(data) });
     })
     .catch((err) => {
       dispatch({ type: GET_RECIPE_DATA_ERROR, err });
