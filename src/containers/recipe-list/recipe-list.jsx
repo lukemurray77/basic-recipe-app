@@ -1,27 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import List from '../../components/list/list';
 
-const RecipeList = ({
-  data,
-  isLoading,
-  loadingError,
-  getData,
-}) => {
-  if (!data && !loadingError) {
-    getData();
+import './recipe-list.scss';
+
+class RecipeList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      searchValue: '',
+    };
+
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  if (isLoading || !data) return <div>LOADING...</div>;
+  componentDidMount() {
+    if (!this.props.data && !this.props.loadingError) {
+      this.props.getData();
+    }
+  }
 
+  handleFilterChange(event) {
+    this.setState({
+      searchValue: event.target.value,
+    });
+  }
 
-  return (
-    <div>
-      <List data={data} />
-    </div>
-  );
-};
+  render() {
+    const {
+      isLoading,
+      data,
+      loadingError,
+    } = this.props;
+
+    if (isLoading || !data) return <div>LOADING...</div>;
+    if (loadingError) return <div>ERROR...</div>;
+
+    const filteredData = data.filter(recipe =>
+      recipe.title.toLowerCase().includes(this.state.searchValue.toLowerCase()));
+
+    return (
+      <React.Fragment>
+        <div className="main-header">
+          <h3 className="title">All Recipes</h3>
+          <div className="search-bar">
+            <input
+              placeholder="Search..."
+              className="input"
+              onChange={this.handleFilterChange}
+            />
+          </div>
+        </div>
+        <List data={filteredData} />
+      </React.Fragment>
+    );
+  }
+}
 
 RecipeList.defaultProps = {
   data: null,

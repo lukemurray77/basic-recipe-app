@@ -1,0 +1,39 @@
+.recipe-card {
+  min-width: 25%;
+  max-width: 40%;
+  background-color: #E8e8e8;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  align-items: flex-start;
+  height: 200px;
+  overflow-x: auto;
+  cursor: pointer;
+  transition: box-shadow .3s;
+
+  &:hover {
+    box-shadow: 0 0 11px black;
+  }
+
+  .recipe-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid aliceblue;
+    margin-bottom: 10px;
+
+    .recipe-title {
+      margin: 10px 0px 10px 0px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .edit-button {
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+  .recipe-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
