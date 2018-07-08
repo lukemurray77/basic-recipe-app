@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import List from '../../components/list/list';
 
@@ -50,6 +51,7 @@ class RecipeList extends Component {
               className="input"
               onChange={this.handleFilterChange}
             />
+            <Link to="/add"><span className="fas fa-plus" /></Link>
           </div>
         </div>
         <List data={filteredData} />
