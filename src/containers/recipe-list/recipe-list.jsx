@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import List from '../../components/list/list';
+import Button from '../../components/button/button';
 
 import './recipe-list.scss';
 
@@ -44,14 +45,16 @@ class RecipeList extends Component {
     return (
       <React.Fragment>
         <div className="main-header">
-          <h3 className="title">All Recipes</h3>
+          <h3 className="title">NomNom Recipes</h3>
           <div className="search-bar">
             <input
               placeholder="Search..."
               className="input"
               onChange={this.handleFilterChange}
             />
-            <Link to="/add"><span className="fas fa-plus" /></Link>
+          <Link to="/add">
+            <Button text="CREATE"/>
+          </Link>
           </div>
         </div>
         <List data={filteredData} />

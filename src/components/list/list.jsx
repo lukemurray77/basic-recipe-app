@@ -10,7 +10,7 @@ const List = (props) => {
   const items = data.map(listItem =>
     (
       <RecipeCard
-        key={listItem.title}
+        key={listItem.id}
         recipe={listItem}
       />
     ));

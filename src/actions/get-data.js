@@ -9,19 +9,20 @@ import {
 const getData = id => (dispatch) => {
   const options = {
     method: 'POST',
-    body: JSON.stringify({
-      body: {
-        id,
-      },
-    }),
+    body: {
+      id,
+    },
     uri: 'http://localhost:8088/_find',
+    json: true,
   };
   dispatch({ type: GET_RECIPE_DATA });
   return rp(options)
     .then((data) => {
-      dispatch({ type: SET_RECIPE_DATA, data: JSON.parse(data) });
+      console.log(data);
+      dispatch({ type: SET_RECIPE_DATA, data });
     })
     .catch((err) => {
+      console.log(err);
       dispatch({ type: GET_RECIPE_DATA_ERROR, err });
     });
 };

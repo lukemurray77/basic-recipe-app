@@ -1,0 +1,14 @@
+.recipe-editor {
+  width: 50%;
+  margin: auto;
+
+  .recipe-editor-title {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

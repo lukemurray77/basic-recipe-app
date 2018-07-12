@@ -1,6 +1,7 @@
 .list-main {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 20px;
 }
