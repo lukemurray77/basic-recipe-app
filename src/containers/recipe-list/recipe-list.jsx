@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import List from '../../components/list/list';
 import Button from '../../components/button/button';
+import PageTitle from '../../components/page-title/page-title';
 
 import './recipe-list.scss';
 
@@ -15,9 +15,11 @@ class RecipeList extends Component {
     };
 
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.viewRecipe = this.viewRecipe.bind(this);
   }
 
   componentDidMount() {
+    console.log(this.props.data);
     if (!this.props.data && !this.props.loadingError) {
       this.props.getData();
     }
@@ -27,6 +29,10 @@ class RecipeList extends Component {
     this.setState({
       searchValue: event.target.value,
     });
+  }
+
+  viewRecipe(id) {
+    this.props.history.push(`/view/${id}`);
   }
 
   render() {
@@ -43,20 +49,21 @@ class RecipeList extends Component {
     const filteredData = data.filter(recipe =>
       recipe.title.toLowerCase().includes(this.state.searchValue.toLowerCase()));
 
+    const rightHeaderContent = (
+      <div className="search-bar">
+        <input
+          placeholder="Search..."
+          className="input"
+          onChange={this.handleFilterChange}
+        />
+        <Button text="CREATE" isLink path="/add" />
+      </div>
+    );
+
     return (
       <React.Fragment>
-        <div className="main-header">
-          <h3 className="title">NomNom Recipes</h3>
-          <div className="search-bar">
-            <input
-              placeholder="Search..."
-              className="input"
-              onChange={this.handleFilterChange}
-            />
-            <Button text="CREATE" isLink path="/add" />
-          </div>
-        </div>
-        <List data={filteredData} onDelete={onDelete} />
+        <PageTitle title="NomNom Recipes" rightHeaderContent={rightHeaderContent} />
+        <List data={filteredData} onDelete={onDelete} viewRecipe={this.viewRecipe} />
       </React.Fragment>
     );
   }
@@ -76,6 +83,7 @@ RecipeList.propTypes = {
   isLoading: PropTypes.bool,
   loadingError: PropTypes.bool,
   getData: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default RecipeList;

@@ -1,29 +1,16 @@
-.main-header {
+.search-bar {
+  position: relative;
+  margin: auto 20px auto auto;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
-  padding-left: 50px;
-  height: 100px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 
-  .title {
-    margin-bottom: auto;
-    margin-top: auto;
-  }
-  .search-bar {
-    position: relative;
-    margin: auto 20px auto auto;
-    display: flex;
-
-    .input {
-      border: 0;
-      background-color: rgba(0, 0, 0, 0.05);
-      padding: 5px;
-      border-radius: 3px;
-      margin-right: 10px;
-      &:focus {
-        outline: 0;
-      }
+  .input {
+    border: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 5px;
+    border-radius: 3px;
+    margin-right: 10px;
+    &:focus {
+      outline: 0;
     }
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../components/button/button';
+import PageTitle from '../../components/page-title/page-title';
 
 import './recipe-editor.scss';
 
@@ -21,7 +22,7 @@ class RecipeEditor extends Component {
   }
 
   componentDidMount() {
-    if (this.props.isEdit || this.props.isView) {
+    if (this.props.isEdit) {
       const { id } = this.props.match.params;
       const recipe = this.props.data.find(item => item.id === id);
       this.updateRecipeState(recipe);
@@ -57,41 +58,42 @@ class RecipeEditor extends Component {
   render() {
     const {
       isEdit,
-      isView,
     } = this.props;
 
-    const pageTitle = isEdit ? 'Edit Recipe' : 'Create new Recipe';
+    const pageTitleText = isEdit ? 'Edit Recipe' : 'Create new Recipe';
 
     return (
-      <div className="recipe-editor">
-        <h2 className="recipe-editor-title">{pageTitle}</h2>
-        <form className="add-edit-form">
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              className="form-control"
-              id="title"
-              value={this.state.title}
-              onChange={this.handleTitleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="title">Recipe</label>
-            <textarea
-              rows="8"
-              className="form-control"
-              id="recipe"
-              onChange={this.handleContentChange}
-              value={this.state.content}
-            />
-          </div>
-          <div className="form-buttons">
-            <Button type="danger" text="Cancel" isLink path="/" />
-            <Button type="light" text="Save" onClick={this.onSave} />
-          </div>
-        </form>
-      </div>
+      <React.Fragment>
+        <PageTitle title={pageTitleText} />
+        <div className="recipe-editor">
+          <form className="add-edit-form">
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                value={this.state.title}
+                onChange={this.handleTitleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="title">Recipe</label>
+              <textarea
+                rows="8"
+                className="form-control"
+                id="recipe"
+                onChange={this.handleContentChange}
+                value={this.state.content}
+              />
+            </div>
+            <div className="form-buttons">
+              <Button type="danger" text="Cancel" isLink path="/" />
+              <Button type="light" text="Save" onClick={this.onSave} />
+            </div>
+          </form>
+        </div>
+      </React.Fragment>
     );
   }
 }
@@ -99,13 +101,11 @@ class RecipeEditor extends Component {
 RecipeEditor.defaultProps = {
   onSave: () => {},
   isEdit: false,
-  isView: false,
 };
 
 RecipeEditor.propTypes = {
   onSave: PropTypes.func,
   isEdit: PropTypes.bool,
-  isView: PropTypes.bool,
 };
 
 export default RecipeEditor;

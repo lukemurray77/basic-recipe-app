@@ -6,13 +6,14 @@ import RecipeCard from '../recipe-card/recipe-card';
 import './list.scss';
 
 const List = (props) => {
-  const { data, onDelete } = props;
+  const { data, onDelete, viewRecipe } = props;
   const items = data.map(listItem =>
     (
       <RecipeCard
         key={listItem.id}
         recipe={listItem}
         onDelete={onDelete}
+        viewRecipe={viewRecipe}
       />
     ));
 
@@ -32,6 +33,8 @@ List.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
   })),
+  onDelete: PropTypes.func.isRequired,
+  viewRecipe: PropTypes.func.isRequired,
 };
 
 export default List;

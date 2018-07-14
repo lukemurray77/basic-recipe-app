@@ -22,7 +22,7 @@ const editRecipe = ({ content, title, id }) => (dispatch) => {
     .then(() => {
       dispatch({
         type: EDIT_RECIPE_DATA,
-        data: [{ content, title, id }],
+        newRecipe: { content, title, id },
       });
     })
     .catch((err) => {

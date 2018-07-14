@@ -35,25 +35,26 @@ const reducer = (state = initialState, action) => {
         loadingError: true,
       };
     case ADD_RECIPE_DATA: {
-      console.log(state);
       const newData = state.data.concat(action.data);
       return {
         data: newData,
         isLoading: false,
       };
     }
-    case EDIT_RECIPE_DATA:
+    case EDIT_RECIPE_DATA: {
+      const { newRecipe } = action;
+      const index = state.data.findIndex(item => item.id === newRecipe.id);
+      console.log(index);
+      const newData = state.data;
+      newData[index] = newRecipe;
       return {
-        data: null,
+        data: newData,
         isLoading: false,
       };
+    }
     case DELETE_RECIPE_DATA: {
-      console.log(state);
-      console.log(state.data);
       const newData = state.data.filter(recipe =>
         recipe.id !== action.id);
-      console.log(action.id);
-      console.log(newData);
       return {
         isLoading: false,
         data: newData,
