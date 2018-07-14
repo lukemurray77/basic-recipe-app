@@ -6,12 +6,13 @@ import RecipeCard from '../recipe-card/recipe-card';
 import './list.scss';
 
 const List = (props) => {
-  const { data } = props;
+  const { data, onDelete } = props;
   const items = data.map(listItem =>
     (
       <RecipeCard
         key={listItem.id}
         recipe={listItem}
+        onDelete={onDelete}
       />
     ));
 

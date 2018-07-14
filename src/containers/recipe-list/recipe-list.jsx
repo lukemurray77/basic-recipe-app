@@ -34,6 +34,7 @@ class RecipeList extends Component {
       isLoading,
       data,
       loadingError,
+      onDelete,
     } = this.props;
 
     if (isLoading || !data) return <div>LOADING...</div>;
@@ -55,7 +56,7 @@ class RecipeList extends Component {
             <Button text="CREATE" isLink path="/add" />
           </div>
         </div>
-        <List data={filteredData} />
+        <List data={filteredData} onDelete={onDelete} />
       </React.Fragment>
     );
   }
