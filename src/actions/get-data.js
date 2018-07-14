@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+import fs from 'fs';
 import {
   SET_RECIPE_DATA,
   RECIPE_LOADING,
@@ -18,6 +19,7 @@ const getData = id => (dispatch) => {
   dispatch({ type: RECIPE_LOADING });
   return rp(options)
     .then((data) => {
+      console.log(data);
       dispatch({ type: SET_RECIPE_DATA, data });
     })
     .catch((err) => {

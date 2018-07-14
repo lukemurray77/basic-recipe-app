@@ -12,8 +12,10 @@ const RecipeCard = (props) => {
         <h4 className="recipe-title" role="presentation" onClick={() => viewRecipe(recipe.id)}>
           {recipe.title}
         </h4>
-        <Link to={`/edit/${recipe.id}`}><span className="fas fa-edit" /></Link>
-        <span className="fas fa-trash" role="presentation" onClick={() => onDelete(recipe.id)} />
+        <div className="card-buttons">
+          <Link to={`/edit/${recipe.id}`}><span className="fas fa-edit card-button" /></Link>
+          <span className="fas fa-trash card-button" role="presentation" onClick={() => onDelete(recipe.id)} />
+        </div>
       </div>
       <div className="recipe-body" role="presentation" onClick={() => viewRecipe(recipe.id)}>
         {recipe.content}

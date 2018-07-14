@@ -17,11 +17,21 @@
     justify-content: space-between;
     border-bottom: 1px solid aliceblue;
     margin-bottom: 10px;
+    .card-buttons {
+      margin-right: 20px;
+      margin-top: 13px;
+      .card-button {
+        font-size: 18px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
 
     .recipe-title {
       margin: 10px 0px 10px 0px;
       padding-left: 20px;
       padding-right: 20px;
+      max-width: 75%;
       cursor: pointer;
     }
   }

@@ -1,5 +1,5 @@
 .recipe-editor {
-  width: 50%;
+  width: 40%;
   margin: auto;
 
   .recipe-editor-title {
@@ -10,5 +10,10 @@
   .form-buttons {
     display: flex;
     justify-content: space-between;
+  }
+}
+@media only screen and (max-width: 600px)  {
+  .recipe-editor {
+    width: 80%,
   }
 }

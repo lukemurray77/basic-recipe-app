@@ -64,7 +64,7 @@ class RecipeEditor extends Component {
 
     return (
       <React.Fragment>
-        <PageTitle title={pageTitleText} />
+        <PageTitle title={pageTitleText} align="center" />
         <div className="recipe-editor">
           <form className="add-edit-form">
             <div className="form-group">
@@ -80,7 +80,7 @@ class RecipeEditor extends Component {
             <div className="form-group">
               <label htmlFor="title">Recipe</label>
               <textarea
-                rows="8"
+                rows="15"
                 className="form-control"
                 id="recipe"
                 onChange={this.handleContentChange}

@@ -19,7 +19,6 @@ class RecipeList extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.data);
     if (!this.props.data && !this.props.loadingError) {
       this.props.getData();
     }

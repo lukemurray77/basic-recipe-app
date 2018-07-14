@@ -10,13 +10,17 @@ const RecipeView = ({ data, match }) => {
   const { id } = match.params;
   const { title, content } = data.find(recipe => recipe.id === id);
   const rightHeaderContent = (
-    <Button isLink path={`/edit/${id}`} text="EDIT" />
+    <div className="edit-button">
+      <Button isLink path={`/edit/${id}`} text="EDIT" />
+    </div>
   )
   return (
-    <React.Fragment>
+    <div className="recipe-view-page">
       <PageTitle title={title} rightHeaderContent={rightHeaderContent} />
-      <div>{content}</div>
-    </React.Fragment>
+      <div className="recipe-content">
+        {content}
+      </div>
+    </div>
   );
 };
 
