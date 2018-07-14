@@ -52,9 +52,7 @@ class RecipeList extends Component {
               className="input"
               onChange={this.handleFilterChange}
             />
-          <Link to="/add">
-            <Button text="CREATE"/>
-          </Link>
+            <Button text="CREATE" isLink path="/add" />
           </div>
         </div>
         <List data={filteredData} />

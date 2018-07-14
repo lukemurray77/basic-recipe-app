@@ -7,7 +7,7 @@ const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addRecipe: recipe => dispatch(addRecipe(recipe)),
+  onSave: recipe => dispatch(addRecipe(recipe)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeEditor);

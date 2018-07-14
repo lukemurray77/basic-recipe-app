@@ -1,7 +1,10 @@
 import {
   SET_RECIPE_DATA,
-  GET_RECIPE_DATA,
+  RECIPE_LOADING,
   GET_RECIPE_DATA_ERROR,
+  ADD_RECIPE_DATA,
+  UPDATE_RECIPE_DATA_ERROR,
+  EDIT_RECIPE_DATA,
 } from '../actions/action-constants';
 
 const initialState = {
@@ -18,9 +21,8 @@ const reducer = (state = initialState, action) => {
         data: action.data,
         isLoading: false,
       };
-    case GET_RECIPE_DATA:
+    case RECIPE_LOADING:
       return {
-        data: null,
         isLoading: true,
         loadingError: false,
       };
@@ -29,6 +31,18 @@ const reducer = (state = initialState, action) => {
         data: null,
         isLoading: false,
         loadingError: true,
+      };
+    case ADD_RECIPE_DATA: {
+      const newData = state.data.concat(action.data);
+      return {
+        data: newData,
+        isLoading: false,
+      };
+    }
+    case EDIT_RECIPE_DATA:
+      return {
+        data: null,
+        isLoading: false,
       };
     default:
       return state;

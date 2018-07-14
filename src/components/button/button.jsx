@@ -10,7 +10,7 @@ const Button = ({ type, text, onClick }) =>
       <button
         type="button"
         className={`btn btn-${type} btn-block`}
-        onClice={onClick}
+        onClick={onClick}
       >
         {text}
       </button>
@@ -31,12 +31,13 @@ const LinkButtonWrapper = (props) => {
 
 Button.defaultProps = {
   type: 'primary',
+  onClick: () => {},
 };
 
 Button.propTypes = {
   type: PropTypes.string,
   text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default LinkButtonWrapper;

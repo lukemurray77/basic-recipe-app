@@ -6,7 +6,7 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={RecipeList} />
     <Route path="/add" component={AddRecipe} />
-    <Route path="/edit" component={EditRecipe} />
+    <Route path="/edit/:id" component={EditRecipe} />
   </Switch>
 );
 
