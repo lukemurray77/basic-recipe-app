@@ -80,7 +80,7 @@ class RecipeEditor extends Component {
             <div className="form-group">
               <label htmlFor="title">Recipe</label>
               <textarea
-                rows="15"
+                rows="10"
                 className="form-control"
                 id="recipe"
                 onChange={this.handleContentChange}
