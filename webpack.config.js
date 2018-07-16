@@ -16,13 +16,14 @@ const DefinePluginConfig = new webpack.DefinePlugin({
 
 module.exports = {
   devServer: {
-    host: 'localhost',
+    host: '0.0.0.0',
     port: '3000',
     hot: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
     historyApiFallback: true,
+    disableHostCheck: true,
   },
   entry: ['react-hot-loader/patch', path.join(__dirname, '/src/index.jsx')],
   module: {

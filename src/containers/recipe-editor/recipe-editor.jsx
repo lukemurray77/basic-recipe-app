@@ -26,17 +26,16 @@ class RecipeEditor extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.data) {
-      const { id } = this.props.match.params;
-      this.props.getData(id);
+    if (!this.props.data && this.props.isEdit) {
+      this.props.getData();
     } else if (this.props.isEdit) {
-      this.updateRecipeState();
+      this.updateRecipeState(this.props.data);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
-      this.updateRecipeState();
+    if ((nextProps.data !== this.props.data) && nextProps.data) {
+      this.updateRecipeState(nextProps.data);
     }
   }
 
@@ -57,9 +56,9 @@ class RecipeEditor extends Component {
     });
   }
 
-  updateRecipeState() {
+  updateRecipeState(data) {
     const { id } = this.props.match.params;
-    const { title, content } = this.props.data.find(item => item.id === id);
+    const { title, content } = data.find(item => item.id === id);
     this.setState({
       title,
       content,
@@ -149,8 +148,9 @@ class RecipeEditor extends Component {
 
 RecipeEditor.defaultProps = {
   onSave: () => {},
+  getData: () => {},
   isEdit: false,
-  data: [],
+  data: null,
   isLoading: false,
   loadingError: false,
 };
@@ -164,7 +164,7 @@ RecipeEditor.propTypes = {
   })),
   isLoading: PropTypes.bool,
   loadingError: PropTypes.bool,
-  getData: PropTypes.func.isRequired,
+  getData: PropTypes.func,
 };
 
 export default RecipeEditor;

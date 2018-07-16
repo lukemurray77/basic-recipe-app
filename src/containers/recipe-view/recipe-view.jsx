@@ -16,7 +16,7 @@ const RecipeView = ({
   loadingError,
 }) => {
   const { id } = match.params;
-  if (!data) getData(id);
+  if (!data) getData();
   const { title, content } = data ? data.find(recipe => recipe.id === id) : {};
   const rightHeaderContent = (
     <div className="buttons">

@@ -24,7 +24,6 @@ const deleteRecipe = id => (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch({ type: UPDATE_RECIPE_DATA_ERROR, err });
     });
 };

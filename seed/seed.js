@@ -1,21 +1,5 @@
 const rp = require('request-promise');
 
-// const options = {
-//   method: 'POST',
-//   body: {
-//     content: 'content',
-//     title: 'title',
-//   },
-//   uri: 'http://localhost:8088/_store',
-//   json: true,
-// };
-
-// const f = () => {
-//   return rp(options).then(e => console.log(e)).catch(e => console.log(e));
-// }
-// console.log('????????');
-// f();
-
 const seedData = [{
   content: 'Ingredients\n1 tbsp rapeseed oil\n\n1 red pepper, deseeded and diced\n150g wholemeal spaghetti\n2 courgettes (250g), grated\n2 garlic cloves, finely grated\n1 lemon\n\nzested and juiced\n15g basil\n\nfinely chopped\n25g pine nuts, toasted\n2 tbsp finely grated parmesan\n\n or vegetarian alternative (optional)\nMethod\nHeat the oil in a large non-stick frying pan. Add the pepper and cook for 5 mins. Meanwhile, cook the pasta for 10-12 mins until tender.\n\nAdd the courgette and garlic to the pepper and cook, stirring very frequently, for 10-15 mins until the courgette is really soft.\n\nStir in the lemon zest and juice, basil and spaghetti (reserve some pasta water) and toss together, adding a little of the pasta water until nicely coated. Add the pine nuts, then spoon into bowls and serve topped with the parmesan, if using.',
   title: 'Pepper & lemon spaghetti with basil & pine nuts',
@@ -54,6 +38,4 @@ const promises = seedData.map(({ title, content }) => {
   return rp(options);
 });
 
-
-// console.log(promises);
-Promise.all(promises).then((res) => console.log('done')).catch(() => console.log('Seed failed..'));
+Promise.all(promises).then(() => console.log('done')).catch(() => console.log('Seed failed..'));

@@ -21,7 +21,9 @@ class RecipeList extends Component {
   }
 
   componentDidMount() {
-    this.props.getData();
+    if (!this.props.data) {
+      this.props.getData();
+    }
   }
 
   handleFilterChange(event) {
@@ -47,8 +49,8 @@ class RecipeList extends Component {
       pageContent = <ErrorMessage message="Sorry, there was a problem loading the recipes =(" />;
     } else if (isLoading) {
       pageContent = <Loading />;
-    } else if (!data) {
-      pageContent = <div>No Recipes to display. Please create one!</div>;
+    } else if (!data || !data.length) {
+      pageContent = <div className="no-data">No Recipes to display. Please create one!</div>;
     } else {
       const filteredData = data.filter(recipe =>
         recipe.title.toLowerCase().includes(this.state.searchValue.toLowerCase()));
@@ -68,10 +70,10 @@ class RecipeList extends Component {
     );
 
     return (
-      <React.Fragment>
+      <div className="recipe-list-page">
         <PageTitle title="NomNom Recipes" rightHeaderContent={rightHeaderContent} />
         {pageContent}
-      </React.Fragment>
+      </div>
     );
   }
 }
