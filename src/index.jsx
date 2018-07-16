@@ -1,31 +1,46 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { applyMiddleware, compose, createStore } from 'redux';
+import { createHashHistory } from 'history';
+import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { Provider } from 'react-redux';
+import { AppContainer } from 'react-hot-loader';
+import thunk from 'redux-thunk';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-
-import { AppContainer } from 'react-hot-loader';
-import configureStore from './store/configure-store';
-
 import App from './App';
+import reducer from './reducers/root-reducer';
 
 import './style.scss';
 
-const store = configureStore();
-const root = document.getElementById('root');
+const history = createHashHistory();
 
-const render = (Component) => {
+const store = createStore(
+  connectRouter(history)(reducer),
+  compose(applyMiddleware(routerMiddleware(history), thunk)),
+);
+
+const render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <AppContainer>
-        <Component />
-      </AppContainer>
-    </Provider>,
+    <AppContainer>
+      <Provider store={store}>
+        <App history={history} />
+      </Provider>
+    </AppContainer>,
     root,
   );
 };
 
-render(App);
+render();
 
+// Hot reloading
 if (module.hot) {
-  module.hot.accept('./App', () => { render(App); });
+  // Reload components
+  module.hot.accept('./App', () => {
+    render();
+  });
+
+  // Reload reducers
+  module.hot.accept('./reducers/root-reducer', () => {
+    store.replaceReducer(connectRouter(history)(reducer));
+  });
 }

@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+import { push } from 'connected-react-router';
 import {
   RECIPE_LOADING,
   ADD_RECIPE_DATA,
@@ -23,6 +24,7 @@ const addRecipe = ({ content, title }) => (dispatch) => {
         type: ADD_RECIPE_DATA,
         data: [{ content, title, id: data.id }],
       });
+      dispatch(push('/'));
     })
     .catch((err) => {
       dispatch({ type: UPDATE_RECIPE_DATA_ERROR, err });

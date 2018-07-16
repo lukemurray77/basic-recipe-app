@@ -51,6 +51,7 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.join(__dirname, '/build'),
+    publicPath: '/',
   },
   mode: dev ? 'development' : 'production',
   plugins: dev

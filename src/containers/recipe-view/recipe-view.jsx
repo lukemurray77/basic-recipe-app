@@ -11,7 +11,7 @@ const RecipeView = ({ data, match }) => {
   const { title, content } = data.find(recipe => recipe.id === id);
   const rightHeaderContent = (
     <div className="edit-button">
-      <Button isLink path={`/edit/${id}`} text="EDIT" />
+      <Button isLink path={`/edit/${id}/true`} text="EDIT" />
     </div>
   )
   return (

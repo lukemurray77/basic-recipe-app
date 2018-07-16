@@ -12,5 +12,6 @@
       "components": [ "Link" ],
       "specialLink": [ "to" ]
     }],
+    "react/prop-types": [2, { "ignore": [ "history", "match", "location" ]}]
   }
 }

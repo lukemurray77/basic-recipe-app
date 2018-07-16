@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 
 import Routes from './Routes';
 
-const App = () => (
-  <BrowserRouter>
+const App = ({ history }) => (
+  <ConnectedRouter history={history}>
     <Routes />
-  </BrowserRouter>
+  </ConnectedRouter>
 );
 
 export default App;

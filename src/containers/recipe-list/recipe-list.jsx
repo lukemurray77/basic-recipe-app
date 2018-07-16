@@ -19,9 +19,7 @@ class RecipeList extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.data && !this.props.loadingError) {
-      this.props.getData();
-    }
+    this.props.getData();
   }
 
   handleFilterChange(event) {

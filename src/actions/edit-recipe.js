@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+import { push } from 'connected-react-router';
 import {
   RECIPE_LOADING,
   EDIT_RECIPE_DATA,
@@ -6,7 +7,7 @@ import {
 } from './action-constants';
 
 
-const editRecipe = ({ content, title, id }) => (dispatch) => {
+const editRecipe = ({ content, title, id }, isView) => (dispatch) => {
   const options = {
     method: 'POST',
     body: {
@@ -24,6 +25,8 @@ const editRecipe = ({ content, title, id }) => (dispatch) => {
         type: EDIT_RECIPE_DATA,
         newRecipe: { content, title, id },
       });
+      const path = isView === 'true' ? `/view/${id}/true` : '/';
+      dispatch(push(path));
     })
     .catch((err) => {
       dispatch({ type: UPDATE_RECIPE_DATA_ERROR, err });

@@ -22,20 +22,28 @@ class RecipeEditor extends Component {
   }
 
   componentDidMount() {
-    if (this.props.isEdit) {
-      const { id } = this.props.match.params;
-      const recipe = this.props.data.find(item => item.id === id);
-      this.updateRecipeState(recipe);
+    if (!this.props.data) {
+      this.props.getData();
+    } else if (this.props.isEdit) {
+      this.updateRecipeState();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      this.updateRecipeState();
     }
   }
 
   onSave() {
+    const { isView } = this.props.match.params;
     const { title, content, id } = this.state;
-    this.props.onSave({ title, content, id });
-    this.props.history.push('/');
+    this.props.onSave({ title, content, id }, isView);
   }
 
-  updateRecipeState({ title, content, id }) {
+  updateRecipeState() {
+    const { id } = this.props.match.params;
+    const { title, content } = this.props.data.find(item => item.id === id);
     this.setState({
       title,
       content,
@@ -58,8 +66,10 @@ class RecipeEditor extends Component {
   render() {
     const {
       isEdit,
+      isLoading,
+      loadingError,
     } = this.props;
-
+    if (isLoading) return <div>LOADING...</div>;
     const pageTitleText = isEdit ? 'Edit Recipe' : 'Create new Recipe';
 
     return (
@@ -101,11 +111,17 @@ class RecipeEditor extends Component {
 RecipeEditor.defaultProps = {
   onSave: () => {},
   isEdit: false,
+  data: [],
 };
 
 RecipeEditor.propTypes = {
   onSave: PropTypes.func,
   isEdit: PropTypes.bool,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    content: PropTypes.string,
+  })),
+  getData: PropTypes.func.isRequired,
 };
 
 export default RecipeEditor;

@@ -65,6 +65,8 @@
   },
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "connected-react-router": "^4.3.0",
+    "history": "^4.7.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

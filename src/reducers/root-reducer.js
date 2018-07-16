@@ -44,7 +44,6 @@ const reducer = (state = initialState, action) => {
     case EDIT_RECIPE_DATA: {
       const { newRecipe } = action;
       const index = state.data.findIndex(item => item.id === newRecipe.id);
-      console.log(index);
       const newData = state.data;
       newData[index] = newRecipe;
       return {
