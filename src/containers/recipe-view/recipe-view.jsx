@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Button from '../../components/button/button';
 import PageTitle from '../../components/page-title/page-title';
+import Loading from '../../components/loading/loading';
+import ErrorMessage from '../../components/error-message/error-message';
 
 import './recipe-view.scss';
 
@@ -22,16 +24,24 @@ const RecipeView = ({
       <Button isLink path={`/edit/${id}/true`} text="EDIT" />
     </div>
   );
+  let pageContent;
 
-  if (isLoading) return <div>LOADING...</div>;
-  if (loadingError) return <div>ERROR...</div>;
+  if (loadingError) {
+    pageContent = <ErrorMessage message="Sorry, there was a problem loading the recipe =(" />;
+  } else if (isLoading) {
+    pageContent = <Loading />;
+  } else {
+    pageContent = (
+      <div className="recipe-content">
+        {content}
+      </div>
+    );
+  }
 
   return (
     <div className="recipe-view-page">
       <PageTitle title={title} rightHeaderContent={rightHeaderContent} />
-      <div className="recipe-content">
-        {content}
-      </div>
+      {pageContent}
     </div>
   );
 };
