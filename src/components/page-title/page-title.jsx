@@ -13,10 +13,11 @@ const PageTitle = ({ title, rightHeaderContent, align }) => (
 PageTitle.defaultProps = {
   rightHeaderContent: null,
   align: 'left',
+  title: '',
 };
 
 PageTitle.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   rightHeaderContent: PropTypes.element,
   align: PropTypes.string,
 };

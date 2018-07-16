@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Button from '../../components/button/button';
 import PageTitle from '../../components/page-title/page-title';
+import Loading from '../../components/loading/loading';
+import ErrorMessage from '../../components/error-message/error-message';
 
 import './recipe-editor.scss';
 
@@ -13,6 +15,8 @@ class RecipeEditor extends Component {
       title: '',
       content: '',
       id: '',
+      titleError: false,
+      contentError: false,
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -23,7 +27,8 @@ class RecipeEditor extends Component {
 
   componentDidMount() {
     if (!this.props.data) {
-      this.props.getData();
+      const { id } = this.props.match.params;
+      this.props.getData(id);
     } else if (this.props.isEdit) {
       this.updateRecipeState();
     }
@@ -38,7 +43,18 @@ class RecipeEditor extends Component {
   onSave() {
     const { isView } = this.props.match.params;
     const { title, content, id } = this.state;
-    this.props.onSave({ title, content, id }, isView);
+    if (title && content) {
+      this.props.onSave({ title, content, id }, isView);
+    } else {
+      this.setFormErrors(!title, !content);
+    }
+  }
+
+  setFormErrors(titleError, contentError) {
+    this.setState({
+      titleError,
+      contentError,
+    });
   }
 
   updateRecipeState() {
@@ -54,12 +70,14 @@ class RecipeEditor extends Component {
   handleTitleChange(event) {
     this.setState({
       title: event.target.value,
+      titleError: false,
     });
   }
 
   handleContentChange(event) {
     this.setState({
       content: event.target.value,
+      contentError: false,
     });
   }
 
@@ -69,12 +87,22 @@ class RecipeEditor extends Component {
       isLoading,
       loadingError,
     } = this.props;
-    if (isLoading) return <div>LOADING...</div>;
-    const pageTitleText = isEdit ? 'Edit Recipe' : 'Create new Recipe';
+    let content;
 
-    return (
-      <React.Fragment>
-        <PageTitle title={pageTitleText} align="center" />
+    if (isLoading) {
+      content = <Loading />;
+    } else if (loadingError) {
+      content = <ErrorMessage message="Sorry there was a problem =(" />;
+    } else {
+      const contentError = this.state.contentError ? (
+        <ErrorMessage message="Please enter a recipe" />
+      ) : null;
+
+      const titleError = this.state.titleError ? (
+        <ErrorMessage message="Please enter a title" />
+      ) : null;
+
+      content = (
         <div className="recipe-editor">
           <form className="add-edit-form">
             <div className="form-group">
@@ -86,6 +114,7 @@ class RecipeEditor extends Component {
                 value={this.state.title}
                 onChange={this.handleTitleChange}
               />
+              {titleError}
             </div>
             <div className="form-group">
               <label htmlFor="title">Recipe</label>
@@ -96,6 +125,7 @@ class RecipeEditor extends Component {
                 onChange={this.handleContentChange}
                 value={this.state.content}
               />
+              {contentError}
             </div>
             <div className="form-buttons">
               <Button type="danger" text="Cancel" isLink path="/" />
@@ -103,6 +133,15 @@ class RecipeEditor extends Component {
             </div>
           </form>
         </div>
+      );
+    }
+
+    const pageTitleText = isEdit ? 'Edit Recipe' : 'Create new Recipe';
+
+    return (
+      <React.Fragment>
+        <PageTitle title={pageTitleText} align="center" />
+        {content}
       </React.Fragment>
     );
   }
@@ -112,6 +151,8 @@ RecipeEditor.defaultProps = {
   onSave: () => {},
   isEdit: false,
   data: [],
+  isLoading: false,
+  loadingError: false,
 };
 
 RecipeEditor.propTypes = {
@@ -121,6 +162,8 @@ RecipeEditor.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
   })),
+  isLoading: PropTypes.bool,
+  loadingError: PropTypes.bool,
   getData: PropTypes.func.isRequired,
 };
 

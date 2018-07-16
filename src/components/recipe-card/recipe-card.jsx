@@ -13,8 +13,8 @@ const RecipeCard = (props) => {
           {recipe.title}
         </h4>
         <div className="card-buttons">
-          <Link to={`/edit/${recipe.id}/false`}><span className="fas fa-edit card-button" /></Link>
-          <span className="fas fa-trash card-button" role="presentation" onClick={() => onDelete(recipe.id)} />
+          <Link to={`/edit/${recipe.id}/false`}><span className="fa fa-pencil card-button" /></Link>
+          <span className="fa fa-trash card-button" role="presentation" onClick={() => onDelete(recipe.id)} />
         </div>
       </div>
       <div className="recipe-body" role="presentation" onClick={() => viewRecipe(recipe.id)}>

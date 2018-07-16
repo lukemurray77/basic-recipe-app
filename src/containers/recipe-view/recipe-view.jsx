@@ -6,14 +6,26 @@ import PageTitle from '../../components/page-title/page-title';
 
 import './recipe-view.scss';
 
-const RecipeView = ({ data, match }) => {
+const RecipeView = ({
+  data,
+  match,
+  getData,
+  isLoading,
+  loadingError,
+}) => {
   const { id } = match.params;
-  const { title, content } = data.find(recipe => recipe.id === id);
+  if (!data) getData(id);
+  const { title, content } = data ? data.find(recipe => recipe.id === id) : {};
   const rightHeaderContent = (
-    <div className="edit-button">
+    <div className="buttons">
+      <Button isLink path="/" text="BACK" />
       <Button isLink path={`/edit/${id}/true`} text="EDIT" />
     </div>
-  )
+  );
+
+  if (isLoading) return <div>LOADING...</div>;
+  if (loadingError) return <div>ERROR...</div>;
+
   return (
     <div className="recipe-view-page">
       <PageTitle title={title} rightHeaderContent={rightHeaderContent} />
@@ -24,14 +36,20 @@ const RecipeView = ({ data, match }) => {
   );
 };
 
-// RecipeEditor.defaultProps = {
-//   onSave: () => {},
-//   isEdit: false,
-// };
-//
-// RecipeEditor.propTypes = {
-//   onSave: PropTypes.func,
-//   isEdit: PropTypes.bool,
-// };
+RecipeView.defaultProps = {
+  data: [],
+  isLoading: false,
+  loadingError: false,
+};
+
+RecipeView.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    content: PropTypes.string,
+  })),
+  isLoading: PropTypes.bool,
+  loadingError: PropTypes.bool,
+  getData: PropTypes.func.isRequired,
+};
 
 export default RecipeView;
