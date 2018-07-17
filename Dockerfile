@@ -5,9 +5,10 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
+
 EXPOSE 3000
 
-RUN npm install
+RUN npm install -silent
 RUN npm rebuild node-sass
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "start-app" ]

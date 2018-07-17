@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server -d",
+    "start": "docker-compose up",
+    "start-app": "cross-env NODE_ENV=development webpack-dev-server -d",
+    "start-api": "./tech-test-api/start-api.sh",
     "build": "cross-env NODE_ENV=production webpack -p",
     "test": "jest",
     "seed": "node seed/seed.js"
