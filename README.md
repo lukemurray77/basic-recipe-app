@@ -1,6 +1,6 @@
 ## Nom Nom Recipe App
 
-Hey, this is my tech test. A simple application which displays a list of recipes, with options to add, edit, delete or view recipes. Built using React, Redux, ES6, Sass, Docker.
+A simple application which displays a list of recipes, with options to add, edit, delete or view recipes. Built using React, Redux, ES6, Sass, Docker.
 
 To run it should be simple!
 
