@@ -1,5 +1,5 @@
 {
-  "name": "undefined",
+  "name": "nomnomrecipes",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "start-api": "./tech-test-api/start-api.sh",
     "build": "cross-env NODE_ENV=production webpack -p",
     "test": "jest",
-    "seed": "node seed/seed.js"
+    "seed": "npm i request && npm i request-promise && node seed/seed.js"
   },
   "keywords": [],
   "author": "",

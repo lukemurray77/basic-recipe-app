@@ -8,7 +8,6 @@ COPY package.json /usr/src/app/
 
 EXPOSE 3000
 
-RUN npm install -silent
-RUN npm rebuild node-sass
+RUN npm install
 
 CMD [ "npm", "run", "start-app" ]
